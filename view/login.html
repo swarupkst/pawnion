@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PawNion - Login</title>
+  <link rel="icon" type="image/icon" href="../content/paonion-favicon.png">
+  <link href="output.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+</head>
+
+<body class="bg-[#F6F7F8] min-h-screen flex flex-col justify-center items-center px-4 py-8">
+
+  <!-- Card -->
+  <div class="bg-[#FEFFFE] shadow-lg rounded-3xl w-full max-w-md p-8 sm:p-10 text-center">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="../content/pawniol-logo.png" alt="PawNion" class="w-36">
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-3xl font-bold text-[#E8793C] mb-6">Welcome Back 🐾</h2>
+
+    <!-- Login Form -->
+    <form class="space-y-5">
+      <!-- Email -->
+      <div class="text-left">
+        <label class="block text-gray-700 font-medium mb-2">Email</label>
+        <input type="email" placeholder="Enter your email" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      </div>
+
+      <!-- Password -->
+      <div class="text-left">
+        <label class="block text-gray-700 font-medium mb-2">Password </label>
+        <input type="password" placeholder="Enter your password" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      </div>
+
+      <!-- Options -->
+      <div class="flex items-center justify-between text-sm text-gray-600">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="text-[#68AADB] focus:ring-[#68AADB]">
+          Remember me
+        </label>
+        <a href="forget-password.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Forgot password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit"
+        class="bg-[#E8793C] hover:bg-[#d66c30] text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition duration-300 w-full">
+        Log In
+      </button>
+    </form>
+
+    <!-- Signup Link -->
+    <p class="mt-5 text-gray-600">
+      Don’t have an account?
+      <a href="registration.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Sign up</a>
+    </p>
+
+    <!-- Back to Home -->
+    <a href="../index.html"
+       class="inline-block mt-6 text-[#68AADB] hover:text-[#E8793C] font-semibold transition">
+      ← Back to Home
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div class="text-center mt-8">
+    <p class="text-gray-500 text-sm">
+      © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion
+    </p>
+  </div>
+
+</body>
+</html>

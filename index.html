@@ -16,9 +16,9 @@
         <a href="#"> <img class="pl-2" src="./content/pawniol-logo.png" class="rounded-b-2xl" alt="PawNion" style="width: 200px;"> </a>
         </div>
         <div class="flex justify-center space-x-8 text-lg font-semibold mt-3">
-            <a class=" hover:text-[#E8793C] transition" href="#">Find a Pet</a>
-            <a class=" hover:text-[#E8793C] transition" href="#">Post for Adeption</a>
-            <a class=" hover:text-[#E8793C] transition" href="#">LogIn/SignUp</a>
+            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/view-pet.html">Find a Pet</a>
+            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/adoption.html">Post for Adeption</a>
+            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/login.html">LogIn</a>
         </div>
     </div>
 
@@ -31,13 +31,20 @@
 
 
         <div class="flex space-x-4 justify-center -m-6">
-        <button class="bg-[#E8793C] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer">View Pet  <i class="fas fa-paw size-6"></i> </button>
-    <button class="bg-[#68AADB] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer">Post for Adoption</button>
-  </div>
+        <a href="./view/view-pet.html" 
+   class="bg-[#E8793C] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer inline-block">
+   View Pet <i class="fas fa-paw ml-1"></i>
+</a>
+
+<a href="./view/adoption.html" 
+   class="bg-[#68AADB] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer inline-block">
+   Post for Adoption
+</a>
+</div>
 
   <div class="flex justify-center mt-20 gap-5">
 
-<a href="">
+<a href="./view/view-pet.html">
     <div class="bg-[#FEFFFE] cursor-pointer text-center w-full lg:w-75 md:w-60  rounded-2xl py-6">
         <i class="fa fa-paw" style="font-size:48px;color:rgb(153, 96, 96)"></i>
         <h3 class="text-3xl">Adopt a Pet</h3>
@@ -45,7 +52,7 @@
     </div>
 </a>
 
-<a href="">
+<a href="./view/adoption.html">
     <div class="bg-[#FEFFFE] cursor-pointer text-center w-full lg:w-75 md:w-60  rounded-2xl pt-5 py-6">
              <img class="size-13 mx-auto" src="./content/dog.png">
         <h3 class="text-3xl">Post for Adeption</h3>
@@ -82,7 +89,11 @@
   <a href="#" class="hover:text-[#E8793C] transition">Privacy Policy</a>
 </div>
   
-
+<div class="text-center mt-8">
+    <p class="text-gray-500 text-sm">
+      © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion
+    </p>
+  </div>
 
     
 </body>

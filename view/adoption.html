@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PawNion - Post for Adoption</title>
+  <link rel="icon" type="image/icon" href="../content/paonion-favicon.png">
+  <link href="output.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+</head>
+
+<body class="bg-[#F6F7F8] min-h-screen flex flex-col items-center justify-center px-4 py-10">
+
+  <!-- Container -->
+  <div class="bg-[#FEFFFE] shadow-lg rounded-3xl w-full max-w-2xl p-8 sm:p-10">
+
+    <!-- Top Navigation Buttons -->
+    <div class="flex justify-between items-center mb-6">
+      <a href="../index.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">
+        ← Back to Home
+      </a>
+
+      <a href="view-pet.html" class="bg-[#68AADB] hover:bg-[#5a96c4] text-white font-semibold px-5 py-2 rounded-2xl shadow-md transition flex items-center gap-2">
+        <i class="fas fa-paw"></i> Adopt a Pet
+      </a>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-3xl sm:text-4xl font-bold text-center text-[#E8793C] mb-8">
+      🐾 Post a Pet for Adoption
+    </h2>
+
+    <!-- Form -->
+    <form class="space-y-6">
+
+      <!-- Pet Name -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Pet Name</label>
+        <input type="text" placeholder="Enter pet name" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      </div>
+
+      <!-- Animal Type -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Animal Type</label>
+        <select required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+          <option value="">Select animal type</option>
+          <option>Dog</option>
+          <option>Cat</option>
+          <option>Bird</option>
+          <option>Rabbit</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Age -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Age (in years)</label>
+        <input type="number" placeholder="Enter age" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      </div>
+
+      <!-- Gender -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Gender</label>
+        <div class="flex items-center gap-6">
+          <label class="flex items-center gap-2">
+            <input type="radio" name="gender" value="Male" required
+              class="text-[#68AADB] focus:ring-[#68AADB]">
+            <span>Male</span>
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="radio" name="gender" value="Female"
+              class="text-[#E8793C] focus:ring-[#E8793C]">
+            <span>Female</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Location</label>
+        <input type="text" placeholder="Enter city or area" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Description</label>
+        <textarea placeholder="Write a short description..." required rows="4"
+          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB] resize-none"></textarea>
+      </div>
+
+      <!-- Upload Photos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Upload Pet Photos</label>
+        <input type="file" accept="image/*" multiple
+          class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+        <p class="text-sm text-gray-500 mt-1">You can upload multiple pictures.</p>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-4 text-center">
+        <button type="submit"
+          class="bg-[#E8793C] hover:bg-[#d66c30] text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition duration-300 w-full sm:w-auto">
+          Post for Adoption
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <div class="text-center mt-8">
+    <p class="text-gray-500 text-sm">
+      © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion
+    </p>
+  </div>
+
+</body>
+</html>
