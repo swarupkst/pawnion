@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +14,20 @@
 
 </head>
 <body class="mx-10 px-10% py-10 bg-[#F6F7F8] ">
-    <div class="flex mb-5 justify-center gap-25">
+    <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-2 sm:space-y-0 text-lg font-semibold mb-6">
         <div>
         <a href="#"> <img class="pl-2" src="./content/pawniol-logo.png" class="rounded-b-2xl" alt="PawNion" style="width: 200px;"> </a>
         </div>
-        <div class="flex justify-center space-x-8 text-lg font-semibold mt-3 sm:block hidden">
-            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/view-pet.html">Find a Pet</a>
-            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/adoption.html">Post for Adeption</a>
-            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/login.html">LogIn</a>
+        <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-2 sm:space-y-0 text-lg font-semibold mb-6 pt-4">
+            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/view-pet.php">Find Pet</a>
+            <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/adoption.php">Adeption</a>
+            <?php if(isset($_SESSION['user_id'])): ?>
+    <a href="http://localhost/pawnion/control/logout.php" class=" hover:text-[#E8793C] transition hover:underline ">Logout</a>
+<?php else: ?>
+    <a href="./view/login.php" class=" hover:text-[#E8793C] transition hover:underline ">Login</a>
+<?php endif; ?>
+
+
         </div>
     </div>
 
@@ -31,19 +40,19 @@
 
 
         <div class="flex space-x-4 justify-center -m-6">
-        <a href="./view/view-pet.html" 
+        <a href="./view/view-pet.php" 
    class="bg-[#E8793C] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer inline-block">
    View Pet <i class="fas fa-paw ml-1"></i>
 </a>
 
-<a href="./view/adoption.html" 
+<a href="./view/adoption.php" 
    class="bg-[#68AADB] text-white px-6 py-3 rounded-4xl hover:opacity-90 transition cursor-pointer inline-block">
    Post for Adoption
 </a>
 </div>
 
   <div class="flex flex-wrap justify-center gap-6 mt-10">
-  <a href="./view/view-pet.html">
+  <a href="./view/view-pet.php">
     <div class="bg-[#FEFFFE] cursor-pointer text-center w-60 lg:w-72 rounded-2xl py-6">
       <i class="fa fa-paw" style="font-size:48px;color:rgb(153, 96, 96)"></i>
       <h3 class="text-3xl">Adopt a Pet</h3>
@@ -51,7 +60,7 @@
     </div>
   </a>
 
-  <a href="./view/adoption.html">
+  <a href="./view/adoption.php">
     <div class="bg-[#FEFFFE] cursor-pointer text-center w-60 lg:w-72 rounded-2xl pt-5 py-6">
       <img class="size-13 mx-auto" src="./content/dog.png">
       <h3 class="text-3xl">Post for Adeption</h3>
@@ -72,12 +81,41 @@
 
 
 <!-- Adopted info -->
+
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "pawnion"; // your DB name
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Count total rows from adoption table
+$sql = "SELECT COUNT(id) AS total_posts FROM adoption"; // use your table name here
+$result = $conn->query($sql);
+
+$total_posts = 0;
+if ($result) {
+    $row = $result->fetch_assoc();
+    $total_posts = $row['total_posts'];
+}
+
+$conn->close();
+?>
+
 <div class="text-center mb-4 mt-10">
   <p class="flex justify-center items-center text-gray-700 font-bold">
     <i class="fa fa-paw mr-2" style="font-size:15px;color:rgb(153, 96, 96)"></i>
-    <span id="adopt">10+ pets adopted!</span>
+    <span id="adopt"><?php echo $total_posts; ?>+ pets adopted!</span>
   </p>
 </div>
+
 
 <!-- Footer links -->
 <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-2 sm:space-y-0 text-lg font-semibold mb-6">

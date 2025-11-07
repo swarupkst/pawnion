@@ -15,7 +15,7 @@
   <div class="bg-[#FEFFFE] shadow-lg rounded-3xl w-full max-w-md p-8 sm:p-10">
 
     <!-- Back Button -->
-    <a href="login.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold mb-6 inline-block transition">
+    <a href="login.php" class="text-[#68AADB] hover:text-[#E8793C] font-semibold mb-6 inline-block transition">
       ← Back to Login
     </a>
 
@@ -52,7 +52,7 @@
     <!-- Extra Links -->
     <p class="text-center text-gray-500 text-sm mt-6">
       Remembered your password? 
-      <a href="login.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Login here</a>
+      <a href="login.php" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Login here</a>
     </p>
 
   </div>

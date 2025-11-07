@@ -1,9 +1,16 @@
+<?php
+if (isset($_GET['message'])) {
+    echo '<p class="text-3xl my-3 text-red-700">' . htmlspecialchars($_GET['message']) . '</p>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PawNion - Sign Up</title>
+  <title>PawNion - Login</title>
   <link rel="icon" type="image/icon" href="../content/paonion-favicon.png">
   <link href="output.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -21,60 +28,51 @@
     </div>
 
     <!-- Title -->
-    <h2 class="text-3xl font-bold text-[#68AADB] mb-6">Create an Account 🐶</h2>
+    <h2 class="text-3xl font-bold text-[#E8793C] mb-6">Welcome Back 🐾</h2>
 
-    <!-- Signup Form -->
-    <form class="space-y-5">
+  
 
-      <!-- Name -->
-      <div class="text-left">
-        <label class="block text-gray-700 font-medium mb-2">Full Name</label>
-        <input type="text" placeholder="Enter your full name" required
-          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
-      </div>
 
+    <!-- Login Form -->
+    <form class="space-y-5" action="../control/loginaction.php" method="post">
       <!-- Email -->
       <div class="text-left">
         <label class="block text-gray-700 font-medium mb-2">Email</label>
-        <input type="email" placeholder="Enter your email" required
+        <input type="email" name="email" placeholder="Enter your email" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
       <!-- Password -->
       <div class="text-left">
-        <label class="block text-gray-700 font-medium mb-2">Password</label>
-        <input type="password" placeholder="Create a password" required
+        <label class="block text-gray-700 font-medium mb-2">Password </label>
+        <input type="password" name="password" placeholder="Enter your password" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
-      <!-- Confirm Password -->
-      <div class="text-left">
-        <label class="block text-gray-700 font-medium mb-2">Confirm Password</label>
-        <input type="password" placeholder="Confirm your password" required
-          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+      <!-- Options -->
+      <div class="flex items-center justify-between text-sm text-gray-600">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="text-[#68AADB] focus:ring-[#68AADB]">
+          Remember me
+        </label>
+        <a href="forget-password.php" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Forgot password?</a>
       </div>
 
-      <!-- Terms Checkbox -->
-      <div class="flex items-start text-sm text-gray-600">
-        <input type="checkbox" required class="mt-1 mr-2 text-[#68AADB] focus:ring-[#68AADB]">
-        <p>I agree to the <a href="#" class="text-[#E8793C] hover:text-[#68AADB] font-semibold transition">Terms & Conditions</a></p>
-      </div>
-
-      <!-- Signup Button -->
+      <!-- Login Button -->
       <button type="submit"
-        class="bg-[#68AADB] hover:bg-[#5b9ac9] text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition duration-300 w-full">
-        Sign Up
+        class="bg-[#E8793C] hover:bg-[#d66c30] text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition duration-300 w-full">
+        Log In
       </button>
     </form>
 
-    <!-- Login Link -->
+    <!-- Signup Link -->
     <p class="mt-5 text-gray-600">
-      Already have an account?
-      <a href="login.html" class="text-[#E8793C] hover:text-[#68AADB] font-semibold transition">Log in</a>
+      Don’t have an account?
+      <a href="signup.php" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">Sign up</a>
     </p>
 
     <!-- Back to Home -->
-    <a href="../index.html"
+    <a href="../index.php"
        class="inline-block mt-6 text-[#68AADB] hover:text-[#E8793C] font-semibold transition">
       ← Back to Home
     </a>

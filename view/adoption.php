@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page with a message
+    header("Location: login.php?message=" . urlencode("You must login first"));
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +29,11 @@
 
     <!-- Top Navigation Buttons -->
     <div class="flex justify-between items-center mb-6">
-      <a href="../index.html" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">
+      <a href="../index.php" class="text-[#68AADB] hover:text-[#E8793C] font-semibold transition">
         ← Back to Home
       </a>
 
-      <a href="view-pet.html" class="bg-[#68AADB] hover:bg-[#5a96c4] text-white font-semibold px-5 py-2 rounded-2xl shadow-md transition flex items-center gap-2">
+      <a href="view-pet.php" class="bg-[#68AADB] hover:bg-[#5a96c4] text-white font-semibold px-5 py-2 rounded-2xl shadow-md transition flex items-center gap-2">
         <i class="fas fa-paw"></i> Adopt a Pet
       </a>
     </div>
@@ -32,19 +44,21 @@
     </h2>
 
     <!-- Form -->
-    <form class="space-y-6">
+    <form class="space-y-6" action="../control/post_pet_action.php" method="POST" enctype="multipart/form-data">
+
+
 
       <!-- Pet Name -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Pet Name</label>
-        <input type="text" placeholder="Enter pet name" required
+        <input type="text" name="pet_name" placeholder="Enter pet name" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
       <!-- Animal Type -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Animal Type</label>
-        <select required
+        <select name="animal_type" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
           <option value="">Select animal type</option>
           <option>Dog</option>
@@ -58,7 +72,7 @@
       <!-- Age -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Age (in years)</label>
-        <input type="number" placeholder="Enter age" required
+        <input type="number" name="age" placeholder="Enter age" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
@@ -82,21 +96,21 @@
       <!-- Location -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Location</label>
-        <input type="text" placeholder="Enter city or area" required
+        <input type="text" name="location" placeholder="Enter city or area" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
       <!-- Description -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Description</label>
-        <textarea placeholder="Write a short description..." required rows="4"
+        <textarea name="description" placeholder="Write a short description..." required rows="4"
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB] resize-none"></textarea>
       </div>
 
       <!-- Upload Photos -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Upload Pet Photos</label>
-        <input type="file" accept="image/*" multiple
+        <input type="file" name="photos[]" accept="image/*" multiple
           class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
         <p class="text-sm text-gray-500 mt-1">You can upload multiple pictures.</p>
       </div>
