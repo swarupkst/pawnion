@@ -1,40 +1,26 @@
 <?php
-session_start();
-
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php?message=" . urlencode("You must login first"));
-    exit();
-}
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "pawnion";
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../control/db.php';
 
 // Get search and filter values
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 
-// Prepare SQL
-$sql = "SELECT * FROM adoption WHERE 1=1";
+// Base query
+$sql = "SELECT * FROM adoption WHERE is_adopted = 0";
 
+// Apply search filter
 if ($search != '') {
     $search = $conn->real_escape_string($search);
     $sql .= " AND (pet_name LIKE '%$search%' OR location LIKE '%$search%')";
 }
 
+// Apply type filter
 if ($type != '') {
     $type = $conn->real_escape_string($type);
     $sql .= " AND animal_type = '$type'";
 }
 
+// Sort by latest
 $sql .= " ORDER BY created_at DESC";
 $result = $conn->query($sql);
 ?>
@@ -50,7 +36,7 @@ $result = $conn->query($sql);
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-[#F6F7F8] min-h-screen ">
+<body class="bg-[#F6F7F8] min-h-screen">
 
   <!-- Main Container -->
   <div class="max-w-6xl mx-auto px-4">
@@ -77,18 +63,20 @@ $result = $conn->query($sql);
         type="text" 
         name="search" 
         placeholder="Search by pet name or location..." 
-        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+        value="<?php echo htmlspecialchars($search); ?>"
         class="w-full md:w-1/3 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-[#E8793C]" 
       />
       <select 
         name="type" 
         class="w-full md:w-1/6 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
         <option value="">All Types</option>
-        <option <?php if(isset($_GET['type']) && $_GET['type'] == 'Dog') echo 'selected'; ?>>Dog</option>
-        <option <?php if(isset($_GET['type']) && $_GET['type'] == 'Cat') echo 'selected'; ?>>Cat</option>
-        <option <?php if(isset($_GET['type']) && $_GET['type'] == 'Bird') echo 'selected'; ?>>Bird</option>
-        <option <?php if(isset($_GET['type']) && $_GET['type'] == 'Rabbit') echo 'selected'; ?>>Rabbit</option>
-        <option <?php if(isset($_GET['type']) && $_GET['type'] == 'Other') echo 'selected'; ?>>Other</option>
+        <?php
+          $types = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Other'];
+          foreach ($types as $t) {
+              $selected = ($t == $type) ? 'selected' : '';
+              echo "<option value='$t' $selected>$t</option>";
+          }
+        ?>
       </select>
       <button type="submit" class="bg-[#E8793C] text-white px-6 py-2 rounded-full hover:opacity-90 transition">
         <i class="fas fa-search"></i> Search
@@ -103,23 +91,13 @@ $result = $conn->query($sql);
             $photos = explode(",", $pet['photos']);
             $first_photo = trim($photos[0]);
 
-            // ✅ Ensure correct path for uploads
-            if (!empty($first_photo)) {
-                // Check if path already contains "uploads/"
-                if (strpos($first_photo, 'uploads/') === false) {
-                    $first_photo = "uploads/" . $first_photo;
-                }
-            } else {
-                $first_photo = "../content/default-pet.png";
-            }
-
-            // Optional: check if file exists (avoid broken images)
-            if (!file_exists($first_photo)) {
-                $first_photo = "../content/default-pet.png";
+            // Fallback if no photo or file missing
+            if (empty($first_photo) || !file_exists("../" . $first_photo)) {
+                $first_photo = "content/default-pet.png";
             }
           ?>
           <div class="bg-white rounded-2xl shadow hover:shadow-lg transition">
-            <img src="<?php echo htmlspecialchars($first_photo); ?>" alt="Pet" class="w-full h-48 object-cover rounded-t-2xl">
+            <img src="../<?php echo htmlspecialchars($first_photo); ?>" alt="Pet" class="w-full h-48 object-cover rounded-t-2xl">
             <div class="p-4">
               <h2 class="text-lg font-semibold text-[#333]"><?php echo htmlspecialchars($pet['pet_name']); ?></h2>
               <p class="text-sm text-gray-600">
@@ -139,7 +117,7 @@ $result = $conn->query($sql);
         <p class="col-span-full text-center text-gray-500">No pets found.</p>
       <?php endif; ?>
     </section>
-  </div> <!-- End Main Container -->
+  </div>
 
   <!-- Footer -->
   <div class="text-center mt-8">
@@ -150,4 +128,5 @@ $result = $conn->query($sql);
 
 </body>
 </html>
+
 <?php $conn->close(); ?>

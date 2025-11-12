@@ -1,7 +1,18 @@
 <?php
+session_start();
 include 'db.php';
 
-// Handle form submission
+// Ensure user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>
+            alert('You must be logged in to post a pet.');
+            window.location.href = '../auth/login.php';
+          </script>";
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Collect form data safely
@@ -10,32 +21,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $age = intval($_POST['age']);
     $gender = trim($_POST['gender']);
     $location = trim($_POST['location']);
+    $contact_number = trim($_POST['contact_number']);
     $description = trim($_POST['description']);
 
     // Handle photo uploads
     $uploaded_photos = [];
-    $upload_dir = __DIR__ . "/../uploads/"; // folder path
+    $upload_dir = __DIR__ . "/../uploads/"; // actual folder path on server
+    $upload_url_prefix = "uploads/";        // path for database & browser
 
-    // Make sure folder exists
+    // Create folder if it doesn’t exist
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
 
-    // Ensure file input name="photos[]"
+    // Multiple photo uploads
     if (!empty($_FILES['photos']['name'][0])) {
         foreach ($_FILES['photos']['name'] as $key => $file_name) {
             $tmp_name = $_FILES['photos']['tmp_name'][$key];
 
-            // Skip empty uploads
             if ($tmp_name == "") continue;
 
-            // Create unique name for each file
+            // Create a unique file name
             $new_filename = time() . "_" . basename($file_name);
-            $target_file = $upload_dir . $new_filename;
+            $target_path = $upload_dir . $new_filename;
 
-            // Check if uploaded successfully
-            if (move_uploaded_file($tmp_name, $target_file)) {
-                $uploaded_photos[] = $target_file;
+            if (move_uploaded_file($tmp_name, $target_path)) {
+                // ✅ Save only relative path (web-accessible)
+                $uploaded_photos[] = $upload_url_prefix . $new_filename;
             } else {
                 echo "<script>alert('Error uploading file: $file_name');</script>";
             }
@@ -46,9 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $photos_str = implode(",", $uploaded_photos);
 
     // Insert data into DB
-    $stmt = $conn->prepare("INSERT INTO adoption (pet_name, animal_type, age, gender, location, description, photos)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssissss", $pet_name, $animal_type, $age, $gender, $location, $description, $photos_str);
+    $stmt = $conn->prepare("INSERT INTO adoption (user_id, pet_name, animal_type, age, gender, location, contact_number, description, photos)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ississsss", $user_id, $pet_name, $animal_type, $age, $gender, $location, $contact_number, $description, $photos_str);
 
     if ($stmt->execute()) {
         echo "<script>
@@ -57,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               </script>";
     } else {
         echo "<script>
-                alert('❌ Failed to post pet. Error: " . $stmt->error . "');
+                alert('❌ Failed to post pet. Error: " . addslashes($stmt->error) . "');
                 window.history.back();
               </script>";
     }

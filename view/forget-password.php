@@ -30,7 +30,7 @@
     </p>
 
     <!-- Form -->
-    <form class="space-y-6">
+    <form class="space-y-6" >
 
       <!-- Email -->
       <div>

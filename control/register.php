@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.location.href = '../view/login.php';
               </script>";
     } else {
+        
         echo "<script>
                 alert('Error: ".$stmt->error."');
                 window.history.back();

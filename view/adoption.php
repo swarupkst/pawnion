@@ -100,6 +100,15 @@ if (!isset($_SESSION['user_id'])) {
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
+      <!-- Contact Number -->
+<div>
+  <label class="block text-gray-700 font-medium mb-2">Contact Number</label>
+  <input type="tel" name="contact_number" placeholder="Enter your phone number" pattern="[0-9]{10,15}" required
+    class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
+  <p class="text-sm text-gray-500 mt-1">Enter a valid phone number (10–15 digits).</p>
+</div>
+
+
       <!-- Description -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Description</label>
