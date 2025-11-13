@@ -1,5 +1,5 @@
 <?php
-require_once("db.php");
+include '../model/db.php';
 
 // Step 1: Check token
 if (!isset($_GET['token'])) {

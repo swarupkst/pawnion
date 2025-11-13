@@ -1,5 +1,5 @@
 <?php
-include '../control/db.php';
+include '../model/db.php';
 
 // Get search and filter values
 $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -120,7 +120,7 @@ $result = $conn->query($sql);
   </div>
 
   <!-- Footer -->
-  <div class="text-center mt-8">
+  <div class="text-center mt-8 mb-4">
     <p class="text-gray-500 text-sm">
       © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion
     </p>

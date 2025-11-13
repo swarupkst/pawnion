@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../control/db.php';
+include '../model/db.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -43,6 +43,7 @@ $photos = explode(",", $pet['photos']);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo htmlspecialchars($pet['pet_name']); ?> - Details</title>
 <link href="output.css" rel="stylesheet">
+  <link rel="icon" type="image/icon" href="../content/paonion-favicon.png">
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-[#F6F7F8] min-h-screen">

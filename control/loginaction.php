@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php'; // ✅ Make sure this file contains your DB connection
+include '../model/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verify password
             if (password_verify($password, $hashed_password)) {
-                // ✅ Store session variables
+                // Store session variables
                 $_SESSION['user_id'] = $id;
                 $_SESSION['user_email'] = $email_db;
 

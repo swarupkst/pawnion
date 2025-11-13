@@ -22,7 +22,7 @@ session_start();
             <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/view-pet.php">Find Pet</a>
             <a class=" hover:text-[#E8793C] transition hover:underline" href="./view/adoption.php">Adeption</a>
             <?php if(isset($_SESSION['user_id'])): ?>
-    <a href="http://localhost/pawnion/control/logout.php" class=" hover:text-[#E8793C] transition hover:underline ">Logout</a>
+    <a href="./control/logout.php" class=" hover:text-[#E8793C] transition hover:underline ">Logout</a>
 <?php else: ?>
     <a href="./view/login.php" class=" hover:text-[#E8793C] transition hover:underline ">Login</a>
 <?php endif; ?>
@@ -83,18 +83,7 @@ session_start();
 <!-- Adopted info -->
 
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "pawnion"; // your DB name
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include './model/db.php';
 
 // Count total rows from adoption table
 $sql = "SELECT COUNT(id) AS total_posts FROM adoption"; // use your table name here
@@ -127,8 +116,8 @@ $conn->close();
   
 <div class="text-center mt-8">
     <p class="text-gray-500 text-sm">
-      © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion
-    </p>
+      © 2025 <span class="text-[#E8793C] font-semibold">PawNion</span> — Find Your New Companion | 
+    Developed by <a href="swarupkst.com"><b>Swarup Biswas<b></a> </p>
   </div>
 
     

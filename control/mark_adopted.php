@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-include 'db.php'; // Database connection
+include '../model/db.php';
 
 // Get data safely
 if (!isset($_POST['pet_id']) || !is_numeric($_POST['pet_id'])) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../control/db.php';
+include '../model/db.php';
 
 if (!isset($_GET['token'])) {
     die("Invalid request");
