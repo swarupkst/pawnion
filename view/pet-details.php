@@ -2,6 +2,13 @@
 session_start();
 include '../control/db.php';
 
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page with a message
+    header("Location: login.php?message=" . urlencode("You must login first"));
+    exit();
+}
+
 // Get pet ID from URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     echo "<script>alert('Invalid pet ID'); window.location.href='view-pet.php';</script>";
@@ -15,6 +22,8 @@ $stmt = $conn->prepare("SELECT * FROM adoption WHERE id = ?");
 $stmt->bind_param("i", $pet_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+
 
 if ($result->num_rows === 0) {
     echo "<script>alert('Pet not found'); window.location.href='view-pet.php';</script>";
@@ -69,6 +78,7 @@ $photos = explode(",", $pet['photos']);
         <p class="text-gray-700 mb-2 pl-2"><strong>Location:</strong> <?php echo htmlspecialchars($pet['location']); ?></p>
         <p class="text-gray-700 mb-2 pl-2"><strong>Contact:</strong> <?php echo htmlspecialchars($pet['contact_number']); ?></p>
         <p class="text-gray-700 mt-4 pl-2"><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($pet['description'])); ?></p>
+        <!-- <p class="text-gray-700 mb-2 pl-2"><strong>Post by:</strong> <?php echo htmlspecialchars($pet['full_name']); ?></p> -->
     </div>
 
     <!-- Mark as Adopted Button -->

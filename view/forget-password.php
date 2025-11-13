@@ -30,12 +30,12 @@
     </p>
 
     <!-- Form -->
-    <form class="space-y-6" >
+    <form action="../control/forgot-password-action.php" method="POST" class="space-y-6" >
 
       <!-- Email -->
       <div>
         <label class="block text-gray-700 font-medium mb-2">Email Address</label>
-        <input type="email" placeholder="Enter your email" required
+        <input type="email" name="email" placeholder="Enter your email" required
           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#68AADB]">
       </div>
 
